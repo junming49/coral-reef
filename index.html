@@ -1,0 +1,887 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>蓝色边界｜珊瑚修复站 · 作品编号 400071</title>
+<style>
+:root{--bg:#071922;--panel:#102b35;--line:#24505a;--text:#e9f6ef;--muted:#a4c1be;--aqua:#75d9c4;--coral:#ffad89;--sun:#efcf82}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#092332,#07151d 70%);color:var(--text);font:15px/1.55 "Segoe UI","Microsoft YaHei",sans-serif}
+button,a{font:inherit}button{cursor:pointer}a{color:var(--aqua)}
+.wrap{max-width:1200px;margin:auto;padding:0 22px}
+.top{min-height:64px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #ffffff20;color:var(--muted);font-size:12px;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.18em;color:var(--aqua)}
+.top-right{display:flex;align-items:center;gap:10px}
+.back{color:var(--muted);text-decoration:none}
+.hero{padding:27px 0 20px}.kicker{font-size:11px;letter-spacing:.17em;color:var(--aqua)}
+h1{font-size:clamp(32px,5vw,54px);line-height:1.05;margin:8px 0}
+.sub{color:#b3cac5;max-width:780px;margin:0}
+.layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(285px,.75fr);gap:16px;padding:12px 0 40px}
+.scene,.panel{border:1px solid var(--line);border-radius:16px;background:#0d242e}
+.scene{overflow:hidden;position:relative;min-height:480px}
+.scene-head{padding:15px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff15}
+.scene-head b{font-size:13px}.live{font:10px ui-monospace,monospace;color:var(--aqua)}
+canvas{display:block;width:100%;height:330px;background:#073445}
+.scene-foot{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;color:var(--muted);font-size:11px}
+.panel{padding:18px}.panel h2{font-size:16px;margin:0 0 7px}
+.intro{font-size:12px;color:var(--muted);margin:0 0 14px}
+.meters{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.meter{padding:10px;background:#18343c;border-radius:10px}
+.meter span{display:block;color:var(--muted);font-size:10px}
+.meter b{font-size:18px;color:var(--aqua)}
+.meter u{display:block;font-size:10px;text-decoration:none;color:#8fb3ac}
+.meter i{display:block;height:4px;border-radius:6px;background:#0c1e25;margin-top:6px;overflow:hidden}
+.meter i em{display:block;height:100%;background:linear-gradient(90deg,#efcf82,#75d9c4)}
+.resource{display:flex;align-items:center;justify-content:space-between;margin:12px 0 4px;padding:10px 11px;border:1px solid #315661;border-radius:9px;background:#0a2028;font-size:11px;color:var(--muted)}
+.resource b{color:var(--sun);font:700 15px ui-monospace,monospace}
+.resource i{height:5px;width:44%;display:block;border-radius:9px;background:#07151d;overflow:hidden}
+.resource em{display:block;height:100%;background:var(--sun);transition:width .2s}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.chip{font-size:10px;color:var(--muted);border:1px dashed #315661;border-radius:8px;padding:4px 8px}
+.chip b{color:var(--sun)}
+.model-note{margin:10px 0;color:#a9c4bd;font-size:10px;line-height:1.5}
+.phase{margin:15px 0;padding:12px;border:1px solid #ffffff1a;border-radius:10px;font-size:12px}
+.phase b{color:var(--sun)}
+.action-list{display:grid;gap:8px}
+.action-card{border:1px solid #315661;border-radius:10px;background:#102a34;overflow:hidden}
+.action-card:hover{border-color:#4a7d84}
+.action-head{display:block;width:100%;text-align:left;padding:11px;border:0;background:transparent;color:var(--text);position:relative;padding-right:52px}
+.action-head:hover,.action-head:focus-visible{background:#173a43}
+.action-head b{display:block;color:#d6f2e7;font-size:12px}
+.action-head small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.cost{position:absolute;top:10px;right:10px;font:700 11px ui-monospace,monospace;color:var(--sun);border:1px solid #5b6b52;border-radius:6px;padding:1px 5px}
+.behaviour{margin-left:6px;font-size:10px;color:var(--aqua)}
+.action-body{padding:0 11px 10px;border-top:1px dashed #ffffff1a;font-size:11px;color:#bcd6cd}
+.action-body p{margin:8px 0 0;line-height:1.6}
+.action-body em{color:var(--sun);font-style:normal;font-weight:700}
+.action-body .warn{color:var(--coral)}
+.action-foot{display:flex;gap:8px;padding:0 11px 11px;flex-wrap:wrap}
+.go{border:1px solid var(--aqua);border-radius:8px;background:#12333c;color:var(--text);padding:7px 11px;font-size:11px}
+.go:hover{background:#18444e}
+.know{border:1px solid #4a6f74;border-radius:8px;background:transparent;color:var(--muted);padding:7px 11px;font-size:11px}
+.know:hover{color:var(--sun);border-color:var(--sun)}
+.stagebar{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tool{border:1px solid #35565c;border-radius:9px;background:transparent;color:var(--text);padding:8px 10px;font-size:11px}
+.tool:hover{border-color:var(--sun)}
+.tool.primary{border-color:var(--aqua);color:var(--aqua)}
+.tool:disabled{opacity:.45;cursor:not-allowed}
+.field{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+input[type=text],textarea{background:#081b22;border:1px solid #315661;border-radius:8px;color:var(--text);font:inherit;font-size:12px;padding:7px 9px}
+input[type=text]{flex:1;min-width:120px}
+textarea{width:100%;min-height:64px;resize:vertical;margin-top:6px}
+.block{margin-top:16px;padding:12px;border:1px solid #ffffff1a;border-radius:10px;background:#0a2028}
+.block h3{font-size:12px;margin:0 0 8px;color:var(--sun)}
+.block p{margin:6px 0;font-size:11px;color:#bcd6cd;line-height:1.6}
+.snap-item{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;border-top:1px dashed #ffffff1a;padding:8px 0;font-size:11px}
+.snap-item:first-of-type{border-top:0}
+.snap-item span{color:var(--muted)}
+.snap-item i{display:block;font-style:normal;color:#bcd6cd}
+.mini{border:1px solid #5b6b52;border-radius:7px;background:transparent;color:var(--coral);font-size:10px;padding:4px 7px}
+.log{max-height:118px;overflow:auto;margin-top:12px;padding:10px;background:#081b22;border-radius:9px;color:#a8c7be;font-size:10px}
+.disclaimer{color:#8facaa;font-size:10px;margin-top:12px}
+.toast{color:var(--sun);font-size:11px;min-height:17px;margin-top:6px}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+/* 知识卡弹窗 */
+dialog{border:1px solid var(--line);border-radius:14px;background:#0e2732;color:var(--text);max-width:min(520px,92vw);padding:0}
+dialog::backdrop{background:rgba(3,12,16,.72)}
+.dlg-in{padding:18px}
+.dlg-in h3{margin:0 0 10px;font-size:14px;color:var(--aqua)}
+.dlg-in p{font-size:12px;color:#c6ded6;line-height:1.7;margin:0 0 10px}
+.dlg-in .audit{font-size:10px;color:var(--coral);border:1px dashed #7a5a4c;border-radius:8px;padding:7px}
+/* 作品说明抽屉 */
+.scrim{position:fixed;inset:0;background:rgba(3,12,16,.66);z-index:40}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(460px,100%);z-index:50;background:#0a212b;border-left:1px solid var(--line);display:flex;flex-direction:column;box-shadow:-14px 0 40px rgba(0,0,0,.45)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid #ffffff15}
+.drawer-head h2{font-size:14px;margin:0;color:var(--aqua)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;padding:12px 14px;border-bottom:1px solid #ffffff12}
+.tab{border:1px solid #35565c;border-radius:8px;background:transparent;color:var(--muted);padding:6px 9px;font-size:11px}
+.tab[aria-selected=true]{border-color:var(--aqua);color:var(--aqua);background:#12333c}
+.drawer-body{padding:14px 16px 40px;overflow:auto}
+.tabpane{display:none}.tabpane.on{display:block}
+.tabpane h4{font-size:12px;margin:14px 0 6px;color:var(--sun)}
+.tabpane p,.tabpane li{font-size:11.5px;color:#c1d8d0;line-height:1.75}
+.tabpane ul{margin:4px 0;padding-left:18px}
+.tabpane table{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0}
+.tabpane th,.tabpane td{border:1px solid #24505a;padding:5px 6px;text-align:left;vertical-align:top;color:#c1d8d0;line-height:1.6}
+.tabpane th{color:var(--sun);background:#0c2530;white-space:nowrap}
+.flag-done{color:var(--aqua);border:1px solid #2f6a60;border-radius:6px;padding:1px 5px;font-size:10px;margin-right:6px}
+.flag-todo{color:var(--coral);border:1px solid #7a5a4c;border-radius:6px;padding:1px 5px;font-size:10px;margin-right:6px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.scene{min-height:0}canvas{height:290px}}
+@media(max-width:520px){.wrap{padding:0 14px}.scene-foot{display:block}.scene-foot span{display:block;margin:4px 0}.meters{grid-template-columns:1fr 1fr}.drawer{width:100%}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+[hidden]{display:none!important}
+</style></head><body><div class="wrap">
+<header class="top"><span class="brand">FIELD / 01</span><div class="top-right"><button class="tool" id="openNotes" aria-haspopup="dialog">作品说明</button></div></header>
+<section class="hero"><div class="kicker">GAME DESIGN · ECOLOGY SIMULATION</div><h1>蓝色边界：珊瑚修复站</h1><p class="sub">你是礁区修复站的值守员。先观察线索，再分配有限的修复资源。每个决策都会在这片虚构海域里留下可追踪、可撤回、可对照的变化。</p></section>
+<main class="layout"><section class="scene"><div class="scene-head"><b>01 / 礁区现场 · 第 <span id="roundLabel">1</span> / 4 阶段</b><span class="live">SIMULATION RUNNING</span></div><canvas id="reef" aria-label="程序绘制的珊瑚礁示意场景：颜色随清澈度、热压力与活力指标变化"></canvas><div class="scene-foot"><span>观察点：北坡浅礁 / 影像为原创程序化示意，非实地影像</span><span>拖动鼠标或触摸移动观察焦点</span></div></section>
+<aside class="panel">
+<h2 id="stageTitle">先读懂这片海</h2>
+<p class="intro" id="story">热浪信号正在上升，礁区清澈度偏低。当前画面和指标都是虚构的教学模型，不是实地监测数据。</p>
+<div class="meters" id="meters"></div>
+<div class="resource"><span>行动资源（全程共享）</span><b><span id="budget">8</span> / 8</b><i><em id="budgetFill" style="width:100%"></em></i></div>
+<div class="chips"><span class="chip">社区支持度 <b id="supportChip">0 / 3</b></span><span class="chip">本阶段已用行动 <b id="stageUsed">0</b> 项</span></div>
+<div class="model-note">规则公开：先扣行动点再结算增量；热压力在每阶段末自然上升 3 点（可被社区支持度抵消，下限 1）；清澈度低于 45 时苗圃移植响应折减；热压力低于 45 时缓冲区边际收益递减；社区支持度为后续行动附加多样性收益，上限 3。所有数值均为教学假设。</div>
+<div class="phase"><b id="phaseTag">任务 01 · 观察</b><div id="phaseText">查看指标后，选择一项本轮优先行动。</div></div>
+<div class="action-list" id="actions"></div>
+<div class="stagebar" id="stagebar"></div>
+<div class="block" id="demoBox" hidden><h3>示例策略结果（演示路径，不是最优解）</h3><p id="demoText"></p></div>
+<div class="tools"><button class="tool" id="demoRun">示例策略（一键演示）</button><button class="tool" id="undo">撤回上一步</button><button class="tool" id="reset">重新开始</button><button class="tool" id="export">导出决策记录</button></div>
+<div class="block"><h3>策略快照对比（最多 3 条）</h3><p>把当前这一轮的结果存成快照并命名，最多可并排比较 3 条策略的终值与剩余资源。重新开始不会清空快照。</p><div class="field"><input type="text" id="snapName" placeholder="给这条策略起个名字，例如：先治水" aria-label="策略快照名称"><button class="tool" id="saveSnap">保存快照</button></div><div id="snapList"></div></div>
+<div class="block" id="reviewBox" hidden><h3>复盘（4 阶段结束后填写，会随导出文件保存）</h3><p>1. 哪一步对当前结果贡献最大？你依据什么判断它贡献最大？</p><textarea id="rv1" aria-label="复盘问题一"></textarea><p>2. 哪些变化来自本页的规则模型设定，而不是真实生态规律？请至少举一例。</p><textarea id="rv2" aria-label="复盘问题二"></textarea><p>3. 如果行动资源减半，你会如何调整取舍？说明放弃哪一项及理由。</p><textarea id="rv3" aria-label="复盘问题三"></textarea></div>
+<div class="toast" id="toast" aria-live="polite"></div>
+<div class="log" id="log" aria-label="行动记录">行动记录：尚未作出选择。</div>
+<p class="disclaimer">数值变化由本页设定的规则模型演示，不能用于珊瑚修复决策或生态预测。正式作品需补充真实数据来源、专业审核和用户测试，这些环节目前均标注为尚未开展。</p>
+</aside></main>
+</div>
+
+<!-- 知识卡弹窗：原生 dialog，Esc 可关闭 -->
+<dialog id="knowDlg" aria-labelledby="knowTitle"><div class="dlg-in"><h3 id="knowTitle">知识卡</h3><p id="knowBody"></p><p class="audit" id="knowAudit">知识点待生态相关专业人员审核（审核尚未进行，不作为专业结论使用）。</p><div class="tools"><button class="tool" id="knowClose">关闭</button></div></div></dialog>
+
+<!-- 作品说明抽屉 -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+<div class="drawer-head"><h2 id="drawerTitle">作品说明</h2><button class="tool" id="closeNotes">✕ 关闭 / Esc</button></div>
+<nav class="tabs" id="tabs" role="tablist">
+<button class="tab" role="tab" data-tab="t1" aria-selected="true">简介与目标用户</button>
+<button class="tab" role="tab" data-tab="t2" aria-selected="false">创新点</button>
+<button class="tab" role="tab" data-tab="t3" aria-selected="false">技术路线</button>
+<button class="tab" role="tab" data-tab="t9" aria-selected="false">场景与视觉</button>
+<button class="tab" role="tab" data-tab="t4" aria-selected="false">操作与运行</button>
+<button class="tab" role="tab" data-tab="t8" aria-selected="false">如何使用这件作品</button>
+<button class="tab" role="tab" data-tab="t5" aria-selected="false">验证与自查</button>
+<button class="tab" role="tab" data-tab="t6" aria-selected="false">AI 与素材</button>
+<button class="tab" role="tab" data-tab="t7" aria-selected="false">边界声明</button>
+<button class="tab" role="tab" data-tab="t10" aria-selected="false">版本与变更</button>
+</nav>
+<div class="drawer-body">
+<section class="tabpane on" id="t1" role="tabpanel">
+<p>《蓝色边界：珊瑚修复站》是一款面向珊瑚礁修复科普的单页互动原型：使用者扮演礁区修复站值守员，在 4 个阶段内支配 8 点行动资源，围绕苗圃移植、浑浊源治理、热压力缓冲与社区巡护宣教四项手段做取舍，并观察指标随之发生的变化。</p>
+<h4>目标用户</h4>
+<ul>
+<li>高校与中学的海洋生态类通识课程、社团科普活动（单次使用时长约 5–10 分钟）。</li>
+<li>科普场馆、海洋主题展项中作为自助式解说补充。</li>
+<li>对珊瑚白化与礁区修复议题感兴趣的一般公众。</li>
+</ul>
+<h4>不适用场景</h4>
+<p>任何需要真实数据或专业结论支撑的科研评估、工程设计与管理决策，均不适用于本作品（详见"边界声明"）。</p>
+</section>
+<section class="tabpane" id="t2" role="tabpanel">
+<h4>创新点一：规则全透明、结果可复算</h4>
+<p>作品不使用隐藏数值或随机抽奖：行动的成本、增量、折减阈值与自然上升趋势全部在界面上公开，并随导出文件一并输出。学习者可以逐步复算每一次变化，把"结果好不好"转化为"规则是否被理解"。这与多数科普小游戏把数值演算放在黑箱里的做法形成差异。</p>
+<h4>创新点二：副作用与延迟响应构成可重复的对照实验</h4>
+<p>每项行动同时呈现"作用假设"与"副作用/风险"，且存在时序依赖（先改善清澈度，移植才能充分生效；热压力每阶段末自然上升，使收益被时间稀释）。配合逐步撤回与最多 3 条策略快照并排对比，同一初始条件下可多次重演不同策略，从"单次通关"变成"可对照的策略实验"。</p>
+<h4>创新点三：把不确定性前置到界面与数据里</h4>
+<p>生态科普常见缺口是把游戏数值包装成科学结论。本作品把知识卡与边界声明放在同一操作层（随时可查），知识卡明确标注"待生态相关专业人员审核"，导出文件同时记录尚未验证的环节，使"已知/未知/待验证"在使用者眼前保持可辨识，并把不确定性本身作为教学内容。</p>
+</section>
+<section class="tabpane" id="t3" role="tabpanel">
+<h4>规则模型</h4>
+<p>确定性状态机：<code>state = {回合, 资源, 活力, 清澈度, 热压力, 多样性, 社区支持度}</code>。结算顺序为"扣除行动点 → 判定折减/递减条件 → 应用增量 → 指标 clamp 至 0–100 → 阶段末热压力自然上升"。全部结果由输入决定，无随机项，可重复复现。</p>
+<h4>数据流</h4>
+<p>用户点击 → 规则函数计算并记录 undo 快照 → 更新 state → render() 刷新面板 DOM → draw() 重绘 Canvas → 退出时 exportData() 序列化为 JSON。</p>
+<h4>模块划分</h4>
+<ul>
+<li>数据层：常量、初始指标、四项行动的定义（含成本、假设、风险、知识卡文案）。</li>
+<li>规则层：行动结算、折减判定、阶段推进、撤回栈。</li>
+<li>视图层：指标面板、行动卡折叠区、快照对比列表、复盘区。</li>
+<li>输出层：JSON 导出。辅助层：Canvas 绘制、知识卡弹窗、说明抽屉。</li>
+</ul>
+<h4>四项指标的定义与取值范围</h4>
+<p>四项指标统一取整数、范围 0–100，全部为<b>本页设定的教学假设量</b>，不对应任何真实监测口径：</p>
+<table>
+<tr><th>指标</th><th>含义（模型中）</th><th>初始</th><th>取值约定</th></tr>
+<tr><td>群落活力 health</td><td>礁区造礁珊瑚整体状态的综合示意量</td><td>38</td><td>越高越好；主要由苗圃移植抬升，受热压力上升间接拖累</td></tr>
+<tr><td>水体清澈度 clarity</td><td>水体透明度示意量，代表光可到达的程度</td><td>42</td><td>越高越好；阈值 45 是移植能否充分响应的分界</td></tr>
+<tr><td>热压力 heat</td><td>热胁迫强度示意量</td><td>68</td><td><b>越低越好</b>；每阶段末自然上升，是唯一会自行恶化的指标</td></tr>
+<tr><td>生态多样性 diversity</td><td>礁区物种丰富程度的示意量</td><td>27</td><td>越高越好；受移植直接抬升，并被社区支持度附加</td></tr>
+</table>
+<p>约束：所有指标在每次结算后 clamp 至 0–100；同一操作序列结果完全一致，不含随机项。</p>
+<h4>行动效果的设定逻辑（为什么这样取值）</h4>
+<ul>
+<li><b>成本与收益成对设计</b>：成本高的行动单项收益大（苗圃移植 3 点换活力 +13 / 多样性 +9），成本低的行动单项收益小（社区宣教 1 点换活力 +1 / 多样性 +1），使"每次决策"都必须回答"值不值"，而不是无脑点满。</li>
+<li><b>总量约束</b>：全程 8 点资源、4 个阶段，四项行动按成本 3/2/3/1 组合后最多执行 5–6 次，无法把四种手段都做到位，取舍因此成为作品的核心体验。</li>
+<li><b>初始值刻意偏低</b>：活力 38、多样性 27 留出上升空间，清澈度 42 恰好低于阈值 45（使"先治水再移植"成为可发现的前置关系），热压力 68 高于阈值 45（使第一阶段的缓冲手段不落入递减区间）。</li>
+<li><b>单项幅度控制在 10–20 点</b>：一次行动可见但不至于一步到位，保证 4 个阶段都有可感知的变化，也避免单次决策直接决定成败。</li>
+<li><b>说明</b>：以上取值为可玩性与教学表达服务的假设，未取自实测数据，也未经过专业人员校准。</li>
+</ul>
+<h4>边际递减与折减规则的设计意图</h4>
+<ul>
+<li><b>清澈度 &lt; 45 时移植折减至约四成</b>：把"浑浊水体限制移植成效"这一常见科普表述，转译成可计算的门槛，让"先后顺序"产生实际后果，而不是口头提醒。</li>
+<li><b>热压力 &lt; 45 时缓冲降温由 -15 递减为 -7</b>：表达"胁迫已经不高时，继续投入的边际收益下降"，引导学习者把有限资源投向更紧迫的方向。</li>
+<li><b>社区支持度上限 3 且重复宣教收益极低</b>：避免单一低成本手段被无限重复堆叠成万能解，同时体现社会过程难以被单一变量线性刻画。</li>
+<li><b>两条阈值规则都公开在界面与导出文件中</b>：设计目的不是"惩罚玩家"，而是让阈值可被发现、可被复算、可被讨论。</li>
+</ul>
+<h4>热压力自然上升的意义</h4>
+<ul>
+<li>模型里唯一"不行动也会变差"的指标：每阶段末上升 3 点，用于表达外部驱动因素不完全由值守员的投入决定。</li>
+<li>它使收益被时间稀释：即使本阶段成功降温，若不持续投入，后续阶段仍会回升，从而把"一次性修复"与"持续维护"的区别变成可观察的现象。</li>
+<li>它与社区支持度耦合：支持度每积累 1 点，阶段末上升量减 1（下限 1 点），使最便宜的宣教行动产生跨阶段的延迟收益，为"短期弱、长期有用"的手段留出存在价值。</li>
+<li>该设定同样为教学假设，不代表任何真实升温速率或趋势预测。</li>
+</ul>
+<h4>依赖情况</h4>
+<p>纯 HTML + CSS + 原生 JavaScript，无构建工具、无第三方库、无 CDN、无网络请求，单文件可直接离线打开。</p>
+</section>
+<section class="tabpane" id="t4" role="tabpanel">
+<h4>运行方式</h4>
+<p>双击 coral.html 用任意现代浏览器打开即可（本地 file:// 方式同样可用），无需安装环境、无需联网。</p>
+<h4>最小操作步骤</h4>
+<ul>
+<li>1. 阅读右侧四项指标与初始情境说明。</li>
+<li>2. 点击行动标题展开"作用假设 / 副作用风险"。</li>
+<li>3. 需要背景知识时点击该行动的"知识"按钮查看科普卡。</li>
+<li>4. 在资源允许范围内选择行动，可连续分配；完成后点"结束本阶段"。</li>
+<li>5. 4 个阶段结束后填写复盘三问，点"导出决策记录"得到 JSON 文件。</li>
+</ul>
+<p>随时可用"撤回上一步"回退、用"重新开始"重置本轮（快照列表不会被清空，便于跨轮对比）。</p>
+<h4>示例策略（一键完整通关）</h4>
+<p>点击面板中的"示例策略"按钮，会自动从初始情境开始、按预设路径跑完 4 个阶段（先治水 → 再移植 → 两次宣教，全程不做热压力缓冲），每步间隔约 0.65 秒，便于录制演示视频或快速了解完整流程。跑完后在面板中显示该示例的结果说明。</p>
+<p><b>该示例是一条演示路径，不是最优解</b>，也未经专业评估；它的作用是展示"一轮完整体验长什么样"，并为讨论提供一条可对照的基线（例如：为什么热压力一路上升）。演示会重置当前进度，但不影响已保存的快照。</p>
+<h4>导出文件说明</h4>
+<p>文件名 <code>coral-decisions.json</code>，包含：项目名称与模型版本、免责说明、规则清单、知识卡版本与审核状态、初始指标与最终指标、逐步行动记录与阶段记录、策略快照数组、复盘问题与回答、自查已完成项与尚未开展项清单，以及<b>示例策略标记</b>（是否由示例路径产生、预设路径与结果摘要）、<b>使用建议版本</b>（<code>usage-guide-v1</code>）、<b>场景绘制说明版本</b>（<code>scene-draw-v1</code>）。</p>
+</section>
+<section class="tabpane" id="t5" role="tabpanel">
+<h4>已完成（团队自行核对）</h4>
+<ul>
+<li><span class="flag-done">已完成</span>公开资料自行核对：知识卡内容以公开生态科普资料为参照，由团队成员逐条自行核对；页面中的全部指标与阈值均为本页设定的教学假设，未使用任何真实海域监测数据。</li>
+<li><span class="flag-done">已完成</span>页面功能走查：按操作路径逐项验证导出文件（<code>coral-decisions.json</code> 字段完整）、键盘操作（Tab 聚焦、focus-visible 描边、Esc 关闭弹窗与抽屉）、移动端布局（850px 与 520px 断点单列、抽屉全宽）、边界提示（资源不足、阶段结束与复盘提示）；脚本语法检查通过（node --check）。</li>
+<li><span class="flag-done">已完成</span>代码与第三方资源自查：无外部依赖、图形均由 Canvas 2D 代码绘制、无未授权第三方素材。</li>
+</ul>
+<h4>尚未开展（如实列出，不作已完成陈述）</h4>
+<ul>
+<li><span class="flag-todo">未开展</span>专业审阅：未邀请生态或海洋相关专业人员审阅知识卡内容与规则假设。</li>
+<li><span class="flag-todo">未开展</span>真实数据核对：未使用真实海域监测数据，指标、阈值与响应关系均为教学假设。</li>
+<li><span class="flag-todo">未开展</span>用户测试：未开展目标用户任务测试，无任务完成率、耗时或主观量表数据。</li>
+</ul>
+<h4>后续计划</h4>
+<ul>
+<li><span class="flag-todo">计划</span>邀请生态相关专业人员审阅知识卡与规则假设，并按审阅意见修订文案。负责人：吴昊（团队负责人）；时间：赛后 1 个月内。</li>
+<li><span class="flag-todo">计划</span>查找并核对可引用的公开海域监测数据来源，明确指标口径与出处标注方式。负责人：吴昊（团队负责人）；时间：赛后 2 个月内。</li>
+<li><span class="flag-todo">计划</span>组织目标用户（通识课程学生）任务测试，记录完成率、误操作与主观反馈。负责人：吴昊（团队负责人）；时间：赛后 2 个月内。</li>
+</ul>
+<p><b>一句话原则：本材料的表述与作品实际完成状态一致，未开展的专业审阅、实地测绘与用户测试均如实列为后续工作，未以任何形式宣称已完成。</b></p>
+</section>
+<section class="tabpane" id="t6" role="tabpanel">
+<h4>AI 使用情况</h4>
+<ul>
+<li>AI 辅助：代码初稿与说明文案初稿由 AI 辅助生成。</li>
+<li>团队实际贡献：议题选定、规则设计与参数调试、叙事与复盘点设计、逐行校订与定稿。</li>
+<li>所有规则参数与文案在提交前由团队成员逐条复核，最终责任由团队承担。</li>
+</ul>
+<h4>素材来源</h4>
+<ul>
+<li>图形：全部由 Canvas 2D 程序化绘制（渐变、气泡、递归分支的珊瑚、鱼群），无位图素材。</li>
+<li>字体：使用系统字体，无 Web Font 加载。</li>
+<li>音频：本作品无音频素材。</li>
+<li>第三方素材：无，未引用任何外部图片、图标、音频、字体或 JS 库。</li>
+</ul>
+<h4>团队原创贡献清单</h4>
+<p>主创 吴昊（团队负责人）：整体设计、规则引擎与四项指标联动的设定、最终把关。技术实现 徐志：Canvas 场景绘制、行动卡与预算约束、策略快照与对比、复盘文字导出。内容与设计 苏张柏绮：知识卡内容、课堂使用设计、界面与版式。全部代码、文案与视觉元素由团队自行完成，未使用第三方图片、字体、图标或音频素材。</p>
+</section>
+<section class="tabpane" id="t7" role="tabpanel">
+<h4>边界声明</h4>
+<ul>
+<li>页面中的全部数值、阈值与响应关系均为本页设定的教学假设，不来自任何真实海域监测数据，也未引用实测结果。</li>
+<li>本作品不能用于珊瑚修复决策、生态预测、环境评估或工程管理参考，不能据以判断任何真实礁区状况。</li>
+<li>知识卡内容为科普性初稿，标注"待生态相关专业人员审核"，在审核完成前不构成专业结论。</li>
+<li>画面为程序化绘制的示意影像，不是实地拍摄照片或遥感影像。</li>
+<li>尚未开展用户测试与专业审核，相关结论在页面中一律标注为"尚未开展"，不以已完成陈述。</li>
+</ul>
+</section>
+<section class="tabpane" id="t9" role="tabpanel">
+<h4>场景绘制方式总览</h4>
+<p>礁区画面由 Canvas 2D <b>逐帧代码绘制</b>，不使用任何位图、图标、字体或第三方素材；每次指标变化后重新绘制，画面与状态始终一致。画布按 devicePixelRatio 缩放并在窗口尺寸变化时重算，避免高分屏模糊。</p>
+<h4>分层绘制逻辑（自下而上）</h4>
+<table>
+<tr><th>图层</th><th>绘制方式</th><th>随什么变化</th></tr>
+<tr><td>水体渐变</td><td>自上而下的线性渐变填充整幅画布</td><td>清澈度高于 55 时顶层色调更通透，否则偏暗</td></tr>
+<tr><td>悬浮颗粒</td><td>46 个由确定性序列定位的半透明圆点（气泡/悬浮物）</td><td>仅随指针或触摸焦点平移，不随指标变化</td></tr>
+<tr><td>礁石地形</td><td>由正弦函数生成折线并填充海底轮廓</td><td>固定轮廓，作为珊瑚的承载基底</td></tr>
+<tr><td>珊瑚生长</td><td>递归分支函数绘制，分支深度上限 5 层，末端继续分叉并逐级缩短、变细</td><td>数量随群落活力增减；分支长度随活力缩放；颜色按状态切换（热压力 &gt; 72 偏灰褐、清澈度 &lt; 40 偏土色、常态偏橙）</td></tr>
+<tr><td>鱼群</td><td>椭圆鱼身加三角尾鳍，位置由确定性序列生成</td><td>数量随生态多样性变化，多样性越高鱼越多</td></tr>
+<tr><td>浑浊雾层</td><td>覆盖全画布的半透明矩形叠加层</td><td>不透明度随清澈度降低而升高，直观表现"水变浑"</td></tr>
+</table>
+<h4>视觉与交互上的取舍</h4>
+<ul>
+<li>画面为<b>示意性表达</b>：追求"指标变化看得见"，不追求写实，也不代表任何真实礁区的外观。</li>
+<li>观察焦点交互：鼠标移动或触摸拖动会平移颗粒与鱼群层，提供轻微的临场感；不依赖该交互也能完整使用。</li>
+<li>弱动效偏好：页面遵循 prefers-reduced-motion，开启该系统设置时不播放过渡动画。</li>
+<li>性能：绘制为一次性静态重绘（非持续动画循环），仅在状态变化、焦点移动与尺寸变化时重绘，低性能设备也能流畅运行。</li>
+</ul>
+</section>
+<section class="tabpane" id="t8" role="tabpanel">
+<h4>适合用在哪些课程或活动</h4>
+<ul>
+<li><b>海洋生态 / 环境科学通识课</b>：作为"珊瑚白化与修复"章节的课堂互动环节，用来引出阈值、时序与取舍三个概念。</li>
+<li><b>学生社团与科普活动</b>：单人 5–10 分钟体验，或 2–3 人各跑一条策略后互相比对，适合做小型讨论。</li>
+<li><b>科技馆、海洋主题展项</b>：作为自助式解说补充，配合"导出决策记录"可带走自己的取舍记录。</li>
+</ul>
+<h4>建议的使用流程（约 20 分钟）</h4>
+<ul>
+<li><b>体验 5 分钟</b>：不讲解规则，先让使用者独立完成一轮四阶段决策，遇到疑问可自行展开行动卡或知识卡。</li>
+<li><b>比较 3 条策略</b>：重新开始后换一条思路，把每条结果存为快照（最多 3 条），并排比较终值与剩余资源，讨论"哪条更好、按什么标准算好"。</li>
+<li><b>复盘讨论 10 分钟</b>：围绕下方三个问题交流，并把回答写入复盘区导出留存。</li>
+</ul>
+<h4>配套的三个讨论问题</h4>
+<ul>
+<li>清澈度低于阈值时移植会折减：这个设定对应现实中的什么限制？它是否改变了你的分配顺序？</li>
+<li>热压力每阶段末自然上升：模型为什么要引入"不行动也会变差"的机制？它如何影响你的长期安排？</li>
+<li>本页哪一处变化明显来自规则设定而不是真实生态规律？如果要改进，你会先改哪一条、依据是什么？</li>
+</ul>
+<h4>带领者需要注意的边界（请在使用前说明）</h4>
+<ul>
+<li><b>不要把指标当真实预测</b>：四项数值、阈值与响应关系均为本页设定的教学假设，不来自真实海域监测数据，不能用于判断任何真实礁区状况，也不能作为修复决策、生态预测或环境评估的依据。</li>
+<li><b>不要把"通关结果"当标准答案</b>：模型没有唯一最优解，作品的目标是让取舍依据被说出来，而不是收敛到某个分数。</li>
+<li><b>知识卡仍待专业审核</b>：卡片为科普性初稿，页面上已标注"待生态相关专业人员审核"，讲解时请一并说明这一状态，不要当作专业结论转述。</li>
+<li><b>尚未开展用户测试</b>：目前没有目标用户的完成率与主观反馈数据，使用时请留意参与者的实际理解情况，必要时由带领者补充讲解。</li>
+</ul>
+</section>
+<section class="tabpane" id="t10" role="tabpanel">
+<h4>版本与变更记录</h4>
+<p>以下为版本脉络，按实现顺序排列；日期与公开仓库的提交历史一致，可逐次核对。</p>
+<table>
+<tr><th>版本</th><th>日期</th><th>主要变更</th></tr>
+<tr><td>v1</td><td>2026-10-17</td><td>完成基础可玩原型：4 阶段 / 8 点预算、四项行动、指标面板、程序化 Canvas 礁区场景、JSON 导出。</td></tr>
+<tr><td>v2</td><td>2026-10-18</td><td>补齐"可对照实验"能力：行动卡增加作用假设与副作用、逐步撤回、最多 3 条策略快照对比、知识卡与边界声明、复盘三问，并把验证状态改为诚实口径（已完成 / 尚未开展 / 后续计划）。</td></tr>
+<tr><td>v3</td><td>2026-10-18</td><td>面向正式提交补齐"完整作品"要素：技术路线补充指标定义与取值逻辑、折减与递减的设计意图、热压力自然上升的意义；新增"场景与视觉"说明、"如何使用这件作品"教学建议；新增示例策略一键演示与结果说明；导出 JSON 增加示例策略标记、使用建议版本与场景绘制说明版本。</td></tr>
+<tr><td>v4（当前）</td><td>2026-10-22</td><td>提交版整理：补齐团队原创贡献清单（主创 / 技术实现 / 内容与设计三类分工）与真实署名；版本记录补入实际日期并接入公开仓库；全文去除占位表述。</td></tr>
+</table>
+<p>说明：以上日期对应公开仓库的提交记录，可逐次核对：github.com/junming49/blue-boundary-coral-reef/commits/main 。本页为仓库中的 coral.html。</p>
+</section>
+</div>
+</aside>
+
+<script>
+/* =========================================================
+   蓝色边界：珊瑚修复站 —— 深化版
+   模块顺序：1 常量与数据 / 2 工具 / 3 规则结算 / 4 面板渲染
+             5 快照 / 6 复盘 / 7 导出 / 8 知识卡与说明抽屉 / 9 Canvas / 10 初始化
+   ========================================================= */
+
+/* ---------- 1. 常量与数据层 ---------- */
+const TOTAL_ROUNDS = 4;                 // 阶段总数
+const BUDGET = 8;                       // 全程共享的行动资源
+const HEAT_RISE = 3;                    // 每阶段末热压力自然上升基准值
+const SUPPORT_MAX = 3;                  // 社区支持度上限
+const CLARITY_MIN = 45;                 // 低于该清澈度，苗圃移植响应折减
+const HEAT_LOW = 45;                    // 低于该热压力，缓冲区边际收益递减
+const INITIAL_METRICS = { health:38, clarity:42, heat:68, diversity:27 };
+const METRICS = [['群落活力','health'],['水体清澈度','clarity'],['热压力（越低越好）','heat'],['生态多样性','diversity']];
+
+// 四项行动：成本、增量、作用假设、副作用风险、知识卡文案（科普初稿，待专业审核）
+const ACTIONS = [
+  { id:'nursery', title:'苗圃移植', cost:3, brief:'人工培育断枝后分批移植到退化礁区', effect:{health:13,clarity:0,heat:0,diversity:9},
+    hypothesis:'假设清澈度充足时，移植能较快抬升群落活力与多样性，是最直接的人工补充手段。',
+    risk:'成本最高（3 点）；清澈度低于 45 时移植响应折减至约四成，早期单独投入可能浪费预算；本模型不体现成活率、病虫害与后续维护。',
+    knowledge:'珊瑚苗圃一般在苗圃架上培育断枝，待个体长成后再移植回退化礁盘，目的是提高补充个体的存活机会并保留更多遗传来源。实际成效还受水温、底质、沉积物、草食性鱼类与长期维护等因素共同影响，单次移植通常不能直接恢复整个群落结构。' },
+  { id:'turbidity', title:'减少浑浊源', cost:2, brief:'削减泥沙与陆源输入，改善水体透明度', effect:{health:3,clarity:16,heat:0,diversity:2},
+    hypothesis:'假设降低悬浮物能显著抬升清澈度，为后续苗圃移植创造前置条件。',
+    risk:'见效慢：自身对活力与多样性的直接提升很小，短期看像"没效果"；占用早期预算会推迟更直观的移植行动。',
+    knowledge:'陆源泥沙与营养盐输入会降低水体透明度，削弱造礁珊瑚共生藻的光合作用，因此流域治理常被视为礁区修复的前置条件。这类措施的效果通常滞后于治理周期，短期指标变化往往不明显。' },
+  { id:'heatbuf', title:'热压力缓冲', cost:3, brief:'遮阴、提流与错峰作业降低热胁迫强度', effect:{health:4,clarity:1,heat:-15,diversity:3},
+    hypothesis:'假设在高温窗口对冲部分热胁迫，可为群落争取恢复时间，减缓活力流失。',
+    risk:'成本较高；热压力已低于 45 时边际收益递减（本次仅 -7）；不能改善清澈度，也无法替代对区域升温趋势的应对。',
+    knowledge:'当海水温度持续高于珊瑚与共生藻的适宜范围时，共生关系可能破裂并出现白化现象，因此实践中常用遮阴、局部提流或避开高温窗口作业来降低热胁迫。这类缓冲只能降低胁迫强度，不能消除区域尺度的升温趋势。' },
+  { id:'outreach', title:'社区巡护宣教', cost:1, brief:'社区共管、巡护与公众宣教，降低本地人为压力', effect:{health:1,clarity:0,heat:0,diversity:1},
+    hypothesis:'假设宣教不直接改变水体指标，但能通过社区支持度削弱人为压力：降低阶段末热压力增量，并为后续行动附加多样性收益（上限 3）。',
+    risk:'单次直接收益最弱，占用一个行动位；支持度达到上限后重复投入几乎无效；模型把复杂的社会过程压缩为单一变量，属高度简化。',
+    knowledge:'过度捕捞、锚损、踩踏与随意采集等本地人为压力会削弱礁区的恢复力，社区共管与巡护宣教的目的就是从源头减少这类压力。宣教通常不直接改变水质或水温指标，而是通过改变行为间接改善恢复条件，其成效往往需要较长时间显现。' }
+];
+const ACTION_MAP = {}; ACTIONS.forEach(a => ACTION_MAP[a.id] = a);
+
+const REVIEW_QUESTIONS = [
+  '哪一步对当前结果贡献最大？你依据什么判断它贡献最大？',
+  '哪些变化来自本页的规则模型设定，而不是真实生态规律？请至少举一例。',
+  '如果行动资源减半，你会如何调整取舍？说明会放弃哪一项及理由。'
+];
+
+const RULES_TEXT = [
+  '每次行动先扣除对应行动点，再结算指标增量',
+  '清澈度低于 45 时，苗圃移植的健康与多样性增量折减至 5 / 4',
+  '热压力低于 45 时，热压力缓冲的降温量由 -15 递减为 -7',
+  '社区巡护宣教提升社区支持度（上限 3），并使阶段末热压力自然上升量减少同等数值（下限 1）',
+  '社区支持度为之后每次行动的多样性增量附加同等数值',
+  '每阶段末热压力自然上升 3 点（扣减支持度后不得低于 1 点）',
+  '全部指标限制在 0 至 100 之间，不含任何随机项；同一操作序列可完全复现'
+];
+
+const SELF_CHECK_DONE = [
+  '公开资料自行核对：知识卡以公开生态科普资料为参照逐条核对；指标为教学假设，未使用真实海域监测数据',
+  '页面功能走查：导出 JSON 字段完整、键盘操作、窄屏布局、边界提示；脚本语法检查通过（node --check）',
+  '代码与第三方资源自查：无外部依赖、图形均由代码绘制、无未授权第三方素材'
+];
+const SELF_CHECK_PENDING = [
+  '专业审阅：未邀请生态或海洋相关专业人员审阅（后续计划：赛后 1 个月内，负责人：吴昊（团队负责人））',
+  '真实数据核对：未使用真实海域监测数据（后续计划：赛后 2 个月内，负责人：吴昊（团队负责人））',
+  '用户测试：未开展目标用户任务测试（后续计划：赛后 2 个月内，负责人：吴昊（团队负责人））',
+  '原则：本材料的表述与作品实际完成状态一致，未开展项均如实列为后续工作，未以任何形式宣称已完成'
+];
+
+// 使用建议与场景绘制说明的版本号：随导出文件输出，便于核对说明与作品是否同一版
+const USAGE_GUIDE_VERSION = 'usage-guide-v1';
+const SCENE_DRAW_VERSION = 'scene-draw-v1';
+const USAGE_SCENES = ['海洋生态 / 环境科学通识课', '学生社团与科普活动', '科技馆与海洋主题展项的自助互动'];
+const USAGE_FLOW = ['体验 5 分钟：独立完成一轮四阶段决策', '比较 3 条策略：保存快照并并排对照终值与剩余资源', '复盘讨论 10 分钟：围绕三个讨论问题交流取舍依据'];
+const USAGE_CAUTIONS = [
+  '不要把指标当真实预测：四项数值、阈值与响应关系均为教学假设，不含真实海域监测数据，不能用于修复决策、生态预测或环境评估',
+  '不要把通关结果当标准答案：模型没有唯一最优解，目标是让取舍依据被说出来',
+  '知识卡为科普初稿且待生态相关专业人员审核，不要当作专业结论转述',
+  '用户测试尚未开展，暂无目标用户完成率与主观反馈数据'
+];
+const DISCUSSION_QUESTIONS = [
+  '清澈度低于阈值时移植会折减：这个设定对应现实中的什么限制？它是否改变了你的分配顺序？',
+  '热压力每阶段末自然上升：模型为什么要引入"不行动也会变差"的机制？它如何影响你的长期安排？',
+  '本页哪一处变化明显来自规则设定而不是真实生态规律？如果要改进，你会先改哪一条、依据是什么？'
+];
+// Canvas 场景的分层绘制说明（与说明抽屉"场景与视觉"分区一致）
+const SCENE_LAYERS = [
+  { layer:'水体渐变', way:'自上而下的线性渐变填充整幅画布', by:'清澈度高于 55 时顶层色调更通透，否则偏暗' },
+  { layer:'悬浮颗粒', way:'46 个由确定性序列定位的半透明圆点', by:'仅随指针或触摸焦点平移' },
+  { layer:'礁石地形', way:'由正弦函数生成折线并填充海底轮廓', by:'固定轮廓，作为珊瑚的承载基底' },
+  { layer:'珊瑚生长', way:'递归分支函数绘制，深度上限 5 层', by:'数量与分支长度随群落活力；颜色随热压力与清澈度切换' },
+  { layer:'鱼群', way:'椭圆鱼身加三角尾鳍，确定性位置', by:'数量随生态多样性变化' },
+  { layer:'浑浊雾层', way:'覆盖全画布的半透明矩形叠加层', by:'不透明度随清澈度降低而升高' }
+];
+
+// 示例策略的预设路径：先治水 → 再移植 → 两次宣教；刻意不做热压力缓冲，用于讨论取舍
+const DEMO_PLAN = [
+  { stage:1, actions:['turbidity','outreach'] },
+  { stage:2, actions:['nursery'] },
+  { stage:3, actions:['outreach'] },
+  { stage:4, actions:['outreach'] }
+];
+const DEMO_STEP_MS = 650;   // 示例演示每步间隔，便于录制时看清变化
+
+/* ---------- 2. 通用工具 ---------- */
+function $(id){ return document.getElementById(id); }
+function clamp(v){ return Math.max(0, Math.min(100, v)); }          // 指标限制在 0-100
+function clone(v){ return JSON.parse(JSON.stringify(v)); }          // 深拷贝，用于撤回栈
+function delta(k){ const d = Math.round(state[k] - INITIAL_METRICS[k]); return (d > 0 ? '+' : '') + d; } // 与初始值的差
+function toast(msg){ $('toast').textContent = msg; }
+
+// 一轮的完整初始状态：4 个指标 + 共享资源 + 社区支持度 + 决策记录
+const fresh = () => ({ round:1, resource:BUDGET, support:0, health:INITIAL_METRICS.health,
+  clarity:INITIAL_METRICS.clarity, heat:INITIAL_METRICS.heat, diversity:INITIAL_METRICS.diversity,
+  decisions:[], ended:false, demoUsed:false });
+
+let state = fresh();
+const undoStack = [];        // 撤回栈：行动与阶段推进都会入栈
+const expanded = {};         // 行动卡折叠状态：{ actionId: true|false }
+let snapshots = [];          // 策略快照，最多 3 条，跨轮保留
+const reviewAnswers = ['', '', ''];  // 复盘三问的回答
+let demoRunning = false;   // 示例策略演示进行中标记
+let demoTimers = [];       // 演示定时器，便于中途取消
+
+/* ---------- 3. 规则层：行动结算与阶段推进 ---------- */
+// 结算一次行动：扣点 -> 判定折减/递减 -> 应用增量 -> 记录
+function act(id){
+  if(state.ended) return;
+  const a = ACTION_MAP[id];
+  if(!a || state.resource < a.cost){ toast('行动资源不足，请调整本阶段的分配或结束阶段。'); return; }
+  undoStack.push(clone(state));
+  const d = Object.assign({}, a.effect);
+  const notes = [];
+
+  if(id === 'nursery' && state.clarity < CLARITY_MIN){       // 清澈度不足时移植响应折减
+    d.health = 5; d.diversity = 4;
+    notes.push('清澈度低于 ' + CLARITY_MIN + '，移植响应折减');
+  }
+  if(id === 'heatbuf' && state.heat < HEAT_LOW){             // 低压区间边际收益递减
+    d.heat = -7;
+    notes.push('热压力已较低，缓冲区降温递减为 -7');
+  }
+  if(id === 'outreach'){                                      // 宣教：累积社区支持度
+    if(state.support < SUPPORT_MAX){ notes.push('社区支持度 +1'); }
+    else { d.health = 1; d.diversity = 1; notes.push('支持度已达上限，重复宣教收益极低'); }
+  } else if(state.support > 0){                               // 支持度为后续行动附加多样性收益
+    d.diversity += state.support;
+    notes.push('社区支持附加多样性 +' + state.support);
+  }
+
+  Object.keys(d).forEach(k => { state[k] = clamp(state[k] + d[k]); });
+  if(id === 'outreach' && state.support < SUPPORT_MAX) state.support++;
+  state.resource -= a.cost;
+
+  state.decisions.push({
+    kind:'action', stage:state.round, actionId:a.id, title:a.title, cost:a.cost, note:notes.join('；'),
+    after:{ resource:state.resource, support:state.support, health:state.health,
+            clarity:state.clarity, heat:state.heat, diversity:state.diversity }
+  });
+  toast('已执行「' + a.title + '」，本阶段仍可继续分配资源。');
+  render();
+}
+
+// 推进到下一阶段：阶段末热压力自然上升，可被社区支持度抵消
+function endStage(){
+  if(state.ended) return;
+  undoStack.push(clone(state));
+  const rise = Math.max(1, HEAT_RISE - state.support);
+  state.heat = clamp(state.heat + rise);
+  state.decisions.push({ kind:'stage', stage:state.round, heatRise:rise, stageUsed:stageCount(state.round) });
+  state.round++;
+  if(state.round > TOTAL_ROUNDS){ state.round = TOTAL_ROUNDS; state.ended = true; }
+  toast(state.ended ? '四阶段结束，请填写下方复盘三问。' : '进入第 ' + state.round + ' 阶段，热压力自然上升 ' + rise + ' 点。');
+  render();
+}
+// 统计某一阶段已执行的行动数量（不含阶段结束标记）
+function stageCount(stage){ return state.decisions.filter(d => d.kind === 'action' && d.stage === stage).length; }
+
+/* ---------- 4. 面板渲染 ---------- */
+function render(){
+  $('roundLabel').textContent = state.round;
+  $('budget').textContent = state.resource;
+  $('budgetFill').style.width = (state.resource / BUDGET * 100) + '%';
+  $('supportChip').textContent = state.support + ' / ' + SUPPORT_MAX;
+  $('stageUsed').textContent = stageCount(state.round) + (state.ended ? '（已结束）' : '');
+
+  // 指标卡：数值 + 相对初始基线的变化量
+  $('meters').innerHTML = METRICS.map(function(m){
+    const k = m[1];
+    return '<div class="meter"><span>' + m[0] + '</span><b>' + Math.round(state[k]) + '%</b>'
+      + '<u>较初始 ' + delta(k) + '</u><i><em style="width:' + state[k] + '%"></em></i></div>';
+  }).join('');
+
+  // 任务提示与叙事
+  const STORY = ['热浪信号正在上升，礁区清澈度偏低。先确定修复顺序。',
+    '第一轮行动已产生模型响应。检查预算与指标，决定是否调整策略。',
+    '生态变化并不总是同步发生。本阶段要权衡见效快与见效慢的手段。',
+    '最后一阶段：剩余资源不多时，取舍比数量更关键。'];
+  const PHASE = ['观察', '行动', '复核', '收束'];
+  $('story').textContent = state.ended
+    ? '四阶段完成。请比较初始与当前指标，并回答下方复盘三问。'
+    : STORY[Math.min(state.round, TOTAL_ROUNDS) - 1];
+  $('phaseTag').textContent = state.ended ? '任务完成 · 复盘' : '任务 0' + state.round + ' · ' + PHASE[state.round - 1];
+  $('phaseText').textContent = state.ended
+    ? '可导出本轮完整记录（含快照与复盘），或重新开始体验另一条策略。'
+    : '本阶段可连续分配行动，只要资源足够；完成后点击「结束本阶段」。资源不足的选项会被禁用。';
+
+  renderActions();
+  renderStageBar();
+  // 示例策略结果说明只在"由示例策略跑完且已结束"时显示
+  $('demoBox').hidden = !(state.ended && state.demoUsed);
+  // 演示进行中时禁用会打断流程的按钮
+  $('undo').disabled = demoRunning; $('reset').disabled = demoRunning;
+  $('demoRun').disabled = demoRunning;
+  $('demoRun').textContent = demoRunning ? '演示进行中…' : '示例策略（一键演示）';
+  renderSnapshots();
+  renderReview();
+  renderLog();
+  draw();
+}
+
+// 行动卡：标题点击可折叠展开「作用假设 / 副作用风险」，下方有执行与知识两个按钮
+function renderActions(){
+  const box = $('actions');
+  if(state.ended){
+    box.innerHTML = '<div class="phase"><b>四阶段复盘</b><div>剩余行动资源 ' + state.resource + ' / ' + BUDGET
+      + '，社区支持度 ' + state.support + ' / ' + SUPPORT_MAX + '。与初始情境相比：活力 ' + delta('health')
+      + '，清澈度 ' + delta('clarity') + '，热压力 ' + delta('heat') + '，多样性 ' + delta('diversity')
+      + '。没有唯一最优答案，请在下方说明你的取舍。</div></div>';
+    return;
+  }
+  box.innerHTML = ACTIONS.map(function(a){
+    const poor = state.resource < a.cost;
+    const open = !!expanded[a.id];
+    return '<div class="action-card">'
+      + '<button class="action-head" data-toggle="' + a.id + '" aria-expanded="' + open + '">'
+      + '<span class="cost">' + a.cost + ' 点</span><b>' + a.title + '</b><small>' + a.brief
+      + '<span class="behaviour">' + (open ? '▾ 收起说明' : '▸ 展开：假设与风险') + '</span></small></button>'
+      + '<div class="action-body" data-body="' + a.id + '"' + (open ? '' : ' hidden') + '>'
+      + '<p><em>作用假设</em>：' + a.hypothesis + '</p>'
+      + '<p class="warn"><em>副作用 / 风险</em>：' + a.risk + '</p></div>'
+      + '<div class="action-foot">'
+      + '<button class="go" data-act="' + a.id + '"' + (poor || demoRunning ? ' disabled aria-disabled="true"' : '') + '>'
+      + (demoRunning ? '演示中…' : (poor ? '资源不足' : '执行（-' + a.cost + '）')) + '</button>'
+      + '<button class="know" data-know="' + a.id + '">知识</button></div></div>';
+  }).join('');
+
+  box.querySelectorAll('[data-toggle]').forEach(function(b){
+    b.onclick = function(){ expanded[b.dataset.toggle] = !expanded[b.dataset.toggle]; render(); };
+  });
+  box.querySelectorAll('[data-act]').forEach(function(b){ b.onclick = function(){ act(b.dataset.act); }; });
+  box.querySelectorAll('[data-know]').forEach(function(b){ b.onclick = function(){ openKnowledge(b.dataset.know); }; });
+}
+
+// 阶段推进按钮
+function renderStageBar(){
+  const bar = $('stagebar');
+  if(state.ended){ bar.innerHTML = '<p class="model-note">本轮已结束。可保存快照、填写复盘并导出 JSON。</p>'; return; }
+  const nextLabel = state.round === TOTAL_ROUNDS ? '结束第 4 阶段并进入复盘' : '结束第 ' + state.round + ' 阶段 → 第 ' + (state.round + 1) + ' 阶段';
+  bar.innerHTML = '<button class="tool primary" id="endStage"' + (demoRunning ? ' disabled' : '') + '>'
+    + (demoRunning ? '示例策略演示中…' : nextLabel) + '</button>';
+  if(!demoRunning) $('endStage').onclick = endStage;
+}
+
+// 行动记录：行动与阶段节点混排
+function renderLog(){
+  if(!state.decisions.length){ $('log').innerHTML = '行动记录：尚未作出选择。'; return; }
+  $('log').innerHTML = state.decisions.map(function(d, i){
+    if(d.kind === 'stage'){
+      return i + 1 + '. 第 ' + d.stage + ' 阶段结束 · 本阶段 ' + d.stageUsed + ' 项行动 · 热压力 +' + d.heatRise;
+    }
+    const a = d.after;
+    return i + 1 + '. [S' + d.stage + '] ' + d.title + '（-' + d.cost + '）→ 活力 ' + Math.round(a.health)
+      + ' / 清澈 ' + Math.round(a.clarity) + ' / 热压力 ' + Math.round(a.heat) + ' / 多样性 ' + Math.round(a.diversity)
+      + (d.note ? ' ｜ ' + d.note : '');
+  }).join('<br>');
+}
+
+/* ---------- 5. 策略快照：最多 3 条，并排对比终值与剩余资源 ---------- */
+function saveSnapshot(){
+  const input = $('snapName');
+  const name = (input.value || '').trim() || '策略 ' + (snapshots.length + 1);
+  if(snapshots.length >= 3){ toast('快照已满 3 条，请先删除一条再保存。'); return; }
+  snapshots.push({
+    name: name, resource: state.resource, support: state.support,
+    health: state.health, clarity: state.clarity, heat: state.heat, diversity: state.diversity,
+    actions: state.decisions.filter(d => d.kind === 'action').map(d => d.title), ended: state.ended
+  });
+  input.value = '';
+  toast('已保存快照「' + name + '」，可继续尝试其他策略后对比。');
+  renderSnapshots();
+}
+function removeSnapshot(i){ snapshots.splice(i, 1); toast('已删除该快照。'); renderSnapshots(); }
+function renderSnapshots(){
+  const box = $('snapList');
+  if(!snapshots.length){ box.innerHTML = '<p class="model-note">暂无快照。保存 2–3 条不同策略后即可在此并排比较。</p>'; return; }
+  box.innerHTML = snapshots.map(function(s, i){
+    return '<div class="snap-item"><span><b>' + escapeHtml(s.name) + '</b>'
+      + (s.ended ? '' : '（未完成）') + '<i>活力 ' + Math.round(s.health) + ' ／ 清澈 ' + Math.round(s.clarity)
+      + ' ／ 热压力 ' + Math.round(s.heat) + ' ／ 多样性 ' + Math.round(s.diversity)
+      + ' ／ 剩余资源 ' + s.resource + ' ／ 支持度 ' + s.support + '</i>'
+      + '<i>行动序列：' + (s.actions.length ? s.actions.join(' → ') : '无') + '</i></span>'
+      + '<button class="mini" data-del="' + i + '">删除</button></div>';
+  }).join('');
+  box.querySelectorAll('[data-del]').forEach(function(b){ b.onclick = function(){ removeSnapshot(+b.dataset.del); }; });
+}
+// 用户输入仅用于界面回显，这里做最小转义，避免破坏 DOM 结构
+function escapeHtml(s){
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/* ---------- 6. 复盘：4 阶段结束后填写，随导出保存 ---------- */
+function renderReview(){
+  $('reviewBox').hidden = !state.ended;
+}
+function bindReview(){
+  ['rv1', 'rv2', 'rv3'].forEach(function(id, i){
+    $(id).oninput = function(){ reviewAnswers[i] = $(id).value; };
+  });
+}
+
+/* ---------- 6.5 示例策略：一键跑完预设的四阶段决策（演示录制 / 评委快速体验） ---------- */
+// 取消尚未执行的演示步骤（用于重新开始）
+function clearDemoTimers(){ demoTimers.forEach(function(t){ clearTimeout(t); }); demoTimers = []; }
+
+// 从初始情境开始，按 DEMO_PLAN 自动执行；结束后面板显示结果说明
+function runDemo(){
+  if(demoRunning) return;
+  clearDemoTimers();
+  state = fresh(); undoStack.length = 0;
+  ['rv1', 'rv2', 'rv3'].forEach(function(id){ $(id).value = ''; });
+  reviewAnswers[0] = reviewAnswers[1] = reviewAnswers[2] = '';
+  state.demoUsed = true;          // 标记本轮由示例策略产生，会写入导出文件
+  demoRunning = true;
+  $('demoBox').hidden = true;
+  render();
+  toast('示例策略演示开始：先治水 → 再移植 → 两次宣教（不做热压力缓冲）。');
+  let t = 0;
+  DEMO_PLAN.forEach(function(step){
+    step.actions.forEach(function(id){
+      t += DEMO_STEP_MS;
+      demoTimers.push(setTimeout(function(){ act(id); }, t));
+    });
+    t += DEMO_STEP_MS;
+    demoTimers.push(setTimeout(function(){ endStage(); }, t));
+  });
+  demoTimers.push(setTimeout(finishDemo, t + DEMO_STEP_MS));
+}
+
+// 演示收尾：写出结果说明并恢复按钮可用
+function finishDemo(){
+  demoRunning = false;
+  $('demoText').innerHTML = demoSummary();
+  render();
+  toast('示例策略演示结束：结果说明已显示在上方（演示路径，不是最优解）。');
+}
+
+// 结果说明：终值动态读取当前状态，避免文字与数值不一致
+function demoSummary(){
+  const seq = state.decisions.filter(function(d){ return d.kind === 'action'; })
+    .map(function(d){ return d.title; }).join(' → ') || '无';
+  return '行动序列：' + seq + '。'
+    + '<br>终值：活力 ' + Math.round(state.health) + '（' + delta('health') + '）、清澈度 '
+    + Math.round(state.clarity) + '（' + delta('clarity') + '）、热压力 ' + Math.round(state.heat)
+    + '（越低越好，' + delta('heat') + '）、多样性 ' + Math.round(state.diversity) + '（' + delta('diversity')
+    + '）；剩余资源 ' + state.resource + ' / ' + BUDGET + '，社区支持度 ' + state.support + ' / ' + SUPPORT_MAX + '。'
+    + '<br>路径意图：先用「减少浑浊源」把清澈度抬到阈值 45 以上，再让「苗圃移植」取得完整响应（避免折减）；'
+    + '随后两次「社区巡护宣教」把支持度累积到上限，使阶段末热压力上升量由 3 降到 1。'
+    + '<br><b>取舍代价</b>：该路径全程未投入热压力缓冲，热压力随阶段自然上升，是本示例最明显的短板。'
+    + '<b>这是演示路径，不是最优解</b>，也未经专业评估，仅用于展示一轮完整体验并提供讨论基线。';
+}
+
+/* ---------- 7. 导出 JSON ---------- */
+function exportData(){
+  const data = {
+    project: '蓝色边界：珊瑚修复站',
+    type: '虚构规则模型演示，不是实测数据，不构成生态预测',
+    modelVersion: 'rules-demo-v3',
+    exportedAt: new Date().toISOString(),
+    disclaimer: '本文件中的所有数值与关系均为本页设定的教学假设，不含真实海域监测数据，不能用于珊瑚修复决策或生态预测。',
+    rounds: { total: TOTAL_ROUNDS, budget: BUDGET, current: state.round, ended: state.ended },
+    rules: RULES_TEXT,
+    knowledgeCard: {
+      version: 'knowledge-draft-v1',
+      status: '知识点待生态相关专业人员审核，尚未完成审核，不作为专业结论使用',
+      entries: ACTIONS.map(a => ({ action: a.title, content: a.knowledge, reviewStatus: '待审核' }))
+    },
+    initialMetrics: { resource: BUDGET, support: 0, health: INITIAL_METRICS.health, clarity: INITIAL_METRICS.clarity,
+      heat: INITIAL_METRICS.heat, diversity: INITIAL_METRICS.diversity },
+    finalMetrics: { resource: state.resource, support: state.support, health: state.health,
+      clarity: state.clarity, heat: state.heat, diversity: state.diversity },
+    decisions: state.decisions,
+    snapshots: snapshots,
+    // 示例策略标记：本轮是否由"示例策略"演示路径产生，含预设路径与结果摘要
+    exampleRun: {
+      used: !!state.demoUsed,
+      plan: DEMO_PLAN.map(function(s){ return { stage:s.stage, actions:s.actions.map(function(id){ return ACTION_MAP[id].title; }) }; }),
+      note: '示例策略为演示路径，不是最优解，也未经专业评估；用于演示视频录制与快速体验',
+      summary: state.demoUsed ? demoSummary().replace(/<br>/g, ' ').replace(/<\/?b>/g, '') : null
+    },
+    // 使用建议版本（对应说明抽屉"如何使用这件作品"分区）
+    usageGuide: {
+      version: USAGE_GUIDE_VERSION,
+      scenes: USAGE_SCENES,
+      flow: USAGE_FLOW,
+      discussionQuestions: DISCUSSION_QUESTIONS,
+      cautions: USAGE_CAUTIONS
+    },
+    // 场景绘制说明版本（对应说明抽屉"场景与视觉"分区）
+    sceneRendering: {
+      version: SCENE_DRAW_VERSION,
+      renderer: 'Canvas 2D 程序化绘制，图形全部由代码生成，无第三方素材',
+      devicePixelRatioScaled: true,
+      layers: SCENE_LAYERS
+    },
+    review: { questions: REVIEW_QUESTIONS, answers: reviewAnswers, completed: state.ended && reviewAnswers.some(v => v.trim() !== '') },
+    validation: { completed: SELF_CHECK_DONE, pending: SELF_CHECK_PENDING, note: '标注为尚未开展的项均未完成，不以已完成陈述' }
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'coral-decisions.json';
+  a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+  toast('已导出 coral-decisions.json：规则、指标、快照与复盘回答。');
+}
+
+/* ---------- 8. 知识卡弹窗 与 作品说明抽屉 ---------- */
+const knowDlg = $('knowDlg');
+function openKnowledge(id){
+  const a = ACTION_MAP[id];
+  if(!a || typeof knowDlg.showModal !== 'function'){ toast('当前浏览器不支持弹窗，请查看页面内的规则说明。'); return; }
+  $('knowTitle').textContent = '知识卡 · ' + a.title;
+  $('knowBody').textContent = a.knowledge;
+  $('knowAudit').textContent = '知识点待生态相关专业人员审核（审核尚未进行，不作为专业结论使用）；本卡片为科普性初稿，不构成修复建议。';
+  knowDlg.showModal();
+}
+$('knowClose').onclick = function(){ knowDlg.close(); };
+knowDlg.addEventListener('click', function(e){ if(e.target === knowDlg) knowDlg.close(); }); // 点击遮罩关闭
+
+const drawer = $('drawer'), scrim = $('scrim');
+function openDrawer(){ drawer.hidden = false; scrim.hidden = false; $('openNotes').setAttribute('aria-expanded', 'true'); }
+function closeDrawer(){ drawer.hidden = true; scrim.hidden = true; $('openNotes').setAttribute('aria-expanded', 'false'); $('openNotes').focus(); }
+$('openNotes').onclick = openDrawer;
+$('closeNotes').onclick = closeDrawer;
+scrim.onclick = closeDrawer;
+// 说明抽屉的分区切换
+$('tabs').querySelectorAll('.tab').forEach(function(tab){
+  tab.onclick = function(){
+    $('tabs').querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-selected', String(t === tab)); });
+    document.querySelectorAll('.tabpane').forEach(function(p){ p.classList.toggle('on', p.id === tab.dataset.tab); });
+  };
+});
+// Esc：弹窗优先由原生 dialog 处理，否则关闭抽屉
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Escape') return;
+  if(knowDlg.open) return;
+  if(!drawer.hidden) closeDrawer();
+});
+
+/* ---------- 9. Canvas：按 devicePixelRatio 缩放的确定性场景绘制 ---------- */
+const c = $('reef'), g = c.getContext('2d');
+let focus = 0;   // 观察焦点偏移（鼠标/触摸）
+
+function sizeCanvas(){
+  const r = c.getBoundingClientRect();
+  c.width = Math.max(1, Math.round(r.width * (window.devicePixelRatio || 1)));
+  c.height = Math.max(1, Math.round(r.height * (window.devicePixelRatio || 1)));
+  draw();
+}
+function draw(){
+  const w = c.width, h = c.height;
+  if(!w || !h) return;
+  const s = Math.min(w, h) / 500;
+  // 海水渐变（清澈度越低，整体越偏浑浊）
+  const grad = g.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, state.clarity > 55 ? '#0d6274' : '#0b5161');
+  grad.addColorStop(0.7, '#0a3445');
+  grad.addColorStop(1, '#08242d');
+  g.fillStyle = grad; g.fillRect(0, 0, w, h);
+  // 气泡层：位置由确定性序列生成，仅随观察焦点平移
+  for(let i = 0; i < 46; i++){
+    const bx = ((i * 83 + focus * (window.devicePixelRatio || 1) * 0.22) % (w + 100)) - 50;
+    const by = i * 47 % h, r = (1 + i % 4) * s;
+    g.fillStyle = 'rgba(182,235,219,' + (0.12 + (i % 4) * 0.04) + ')';
+    g.beginPath(); g.arc(bx, by, r, 0, 6.3); g.fill();
+  }
+  // 海底地形
+  g.fillStyle = '#123a39'; g.beginPath(); g.moveTo(0, h * 0.72);
+  for(let a = 0; a <= w; a += w / 14) g.lineTo(a, h * (0.72 + Math.sin(a / w * 7) * 0.05));
+  g.lineTo(w, h); g.lineTo(0, h); g.fill();
+  // 珊瑚：数量随活力、颜色随热压力与清澈度切换
+  const count = 8 + Math.round(state.health / 100 * 8);
+  for(let i = 0; i < count; i++){
+    const bx = (i + 1) * w / (count + 1);
+    const base = h * 0.76 + (i % 3) * h * 0.035;
+    const scale = (0.4 + (i % 5) * 0.12) * s, v = state.health / 100;
+    const col = state.heat > 72 ? '#b77971' : (state.clarity < 40 ? '#bf927c' : '#ef9a7b');
+    branch(bx, base, scale, col, v, 0, 4);
+  }
+  // 鱼群：数量随多样性变化
+  const fish = 3 + Math.round(state.diversity / 20 * 5);
+  for(let i = 0; i < fish; i++){
+    const fx = ((i * 173 + focus * 0.65) % (w + 160)) - 80, fy = h * (0.38 + (i % 3) * 0.13);
+    g.fillStyle = '#eed29a'; g.beginPath(); g.ellipse(fx, fy, 12 * s, 4 * s, 0, 0, 6.3); g.fill();
+    g.beginPath(); g.moveTo(fx + 11 * s, fy); g.lineTo(fx + 19 * s, fy - 5 * s); g.lineTo(fx + 18 * s, fy + 5 * s); g.fill();
+  }
+  // 浑浊雾层：清澈度越低越明显
+  const haze = (100 - state.clarity) / 100 * 0.22;
+  if(haze > 0.01){ g.fillStyle = 'rgba(126,152,142,' + haze.toFixed(3) + ')'; g.fillRect(0, 0, w, h); }
+}
+// 递归绘制珊瑚分支（深度上限 5）
+function branch(bx, base, s, col, v, d, wid){
+  if(d > 5) return;
+  const len = (27 + v * 18) * s;
+  g.strokeStyle = col; g.lineWidth = Math.max(1, wid * s); g.lineCap = 'round';
+  g.beginPath(); g.moveTo(bx, base); g.lineTo(bx + Math.sin(d * 1.8) * 3 * s, base - len); g.stroke();
+  branch(bx - 9 * s, base - len * 0.55, s * 0.78, col, v, d + 1, wid * 0.7);
+  branch(bx + 10 * s, base - len * 0.68, s * 0.73, col, v, d + 1, wid * 0.7);
+}
+
+/* ---------- 10. 初始化 ---------- */
+window.addEventListener('resize', sizeCanvas);
+c.addEventListener('pointermove', function(e){ focus = e.offsetX; draw(); });
+$('undo').onclick = function(){
+  if(demoRunning) return;
+  if(!undoStack.length){ toast('当前没有可撤回的操作。'); return; }
+  state = undoStack.pop(); toast('已撤回上一步，可重新分配。'); render();
+};
+$('reset').onclick = function(){
+  clearDemoTimers(); demoRunning = false;   // 重新开始会中断示例演示
+  state = fresh(); undoStack.length = 0; reviewAnswers[0] = reviewAnswers[1] = reviewAnswers[2] = '';
+  $('rv1').value = ''; $('rv2').value = ''; $('rv3').value = '';
+  toast('已重置为虚构初始情境（快照列表保留，便于跨轮对比）。'); render();
+};
+$('saveSnap').onclick = saveSnapshot;
+$('export').onclick = exportData;
+$('demoRun').onclick = runDemo;
+bindReview();
+sizeCanvas();
+render();
+</script>
+</body></html>
